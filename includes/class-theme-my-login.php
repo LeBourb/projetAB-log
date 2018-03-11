@@ -862,6 +862,7 @@ if(typeof wpOnload=='function')wpOnload()
 	 * - instance - A unqiue instance ID for this instance.
 	 * - default_action - The action to display. Defaults to "login".
 	 * - login_template - The template used for the login form. Defaults to "login-form.php".
+         * - validate_template - The template used for the login form. Defaults to "validate.php".
 	 * - register_template - The template used for the register form. Defaults to "register-form.php".
 	 * - lostpassword_template - The template used for the lost password form. Defaults to "lostpassword-form.php".
 	 * - resetpass_template - The template used for the reset password form. Defaults to "resetpass-form.php".

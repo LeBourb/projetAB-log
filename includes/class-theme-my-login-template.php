@@ -34,8 +34,7 @@ class Theme_My_Login_Template extends Theme_My_Login_Abstract {
 	 */
 	public function __construct( $options = '' ) {
 		$options = wp_parse_args( $options );
-		$options = shortcode_atts( self::default_options(), $options );
-
+		$options = shortcode_atts( self::default_options(), $options );                
 		$this->set_options( $options );
 	}
 
@@ -53,6 +52,7 @@ class Theme_My_Login_Template extends Theme_My_Login_Abstract {
 			'default_action'        => '',
 			'login_template'        => '',
 			'register_template'     => '',
+                        'validate_template'     => '',
 			'lostpassword_template' => '',
 			'resetpass_template'    => '',
 			'user_template'         => '',
@@ -119,9 +119,12 @@ class Theme_My_Login_Template extends Theme_My_Login_Abstract {
 						if ( $this->get_option( 'login_template' ) )
 							$template[] = $this->get_option( 'login_template' );
 						$template[] = 'login-form.php';
-                                                break;
+                                                break;                                        
                                         default :
-                                            $template[] = 'pending.php';
+                                            if ( $this->get_option( 'validate_template' ) )
+                                                $template[] = 'validate.php';
+                                            else 
+                                                $template[] = 'pending.php';
 				}
 			}
 			$this->get_template( $template );

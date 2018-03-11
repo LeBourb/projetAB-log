@@ -254,18 +254,22 @@ class Theme_My_Login_User_Moderation extends Theme_My_Login_Abstract {
 		if ( in_array( 'pending', (array) $user->roles ) )
 			return;
 
-		// Set user to "Pending" role
-		$user->set_role( 'pending' );
+		// Set user to "Pending" role if user is a professional only 
+                if ( $_POST['account-type'] == 'professional'   ) {
+                    $user->set_role( 'pending' );
+                    self::new_user_approval_admin_notification( $user_id );
+                } else {
+                    self::new_user_activation_notification( $user_id );
+                }
+		
 
 		// Send appropriate e-mail depending on moderation type
-		if ( 'email' == $this->get_option( 'type' ) ) {
+		/*if ( 'email' == $this->get_option( 'type' ) ) {
 			// Send activation e-mail
-			self::new_user_activation_notification( $user_id );
 		} elseif ( 'admin' == $this->get_option( 'type' ) ) {
 			// Send approval e-mail
 			if ( apply_filters( 'send_new_user_approval_admin_notification', true ) )
-				self::new_user_approval_admin_notification( $user_id );
-		}
+		}*/
 	}
 
 	/**
@@ -318,13 +322,20 @@ class Theme_My_Login_User_Moderation extends Theme_My_Login_Abstract {
 		$user = new WP_User( $user_id );
 
 		if ( in_array( 'pending', (array) $user->roles ) ) {
-			// Send activation e-mail
-			self::new_user_activation_notification( $user->ID );
-			// Now redirect them
-			$redirect_to = Theme_My_Login_Common::get_current_url( array( 'sendactivation' => 'sent' ) );
-			wp_redirect( $redirect_to );
-			exit;
-		}
+                    // Send activation e-mail
+                    self::new_user_activation_notification( $user->ID );
+                    // Now redirect them
+                    $redirect_to = Theme_My_Login_Common::get_current_url( array( 'sendactivation' => 'sent' ) );
+                    wp_redirect( $redirect_to );
+                    exit;
+		}else {
+                    // Send activation e-mail
+                    self::new_user_activation_notification( $user->ID );
+                    // Now redirect them
+                    $redirect_to = Theme_My_Login_Common::get_current_url( array( 'checkemail' => 'failed' ) );
+                    wp_redirect( $redirect_to );
+                    exit;
+                }
 	}
 
 	/**
@@ -404,10 +415,16 @@ class Theme_My_Login_User_Moderation extends Theme_My_Login_Abstract {
 		$user_email = stripslashes( $user->user_email );
 
 		// Generate an activation key
-		$key = wp_generate_password( 20, false );
+                //$key = wp_generate_password( 20, false );
+                $code = sha1( $user_id . time() );    
+                
+                $wpdb->update( 
+                    'wp_users', //table name     
+                        array( 'user_activation_key' => $code ) // string    ),                               
+                    );
 
 		// Set the activation key for the user
-		$wpdb->update( $wpdb->users, array( 'user_activation_key' => $key ), array( 'user_login' => $user->user_login ) );
+		//$wpdb->update( $wpdb->users, array( 'user_activation_key' => $key ), array( 'user_login' => $user->user_login ) );
 
 		if ( is_multisite() ) {
 			$blogname = $current_site->site_name;
@@ -417,7 +434,7 @@ class Theme_My_Login_User_Moderation extends Theme_My_Login_Abstract {
 			$blogname = wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
 		}
 
-		$activation_url = add_query_arg( array( 'action' => 'activate', 'key' => $key, 'login' => rawurlencode( $user_login ) ), wp_login_url() );
+		$activation_url = add_query_arg( array( 'action' => 'activate', 'key' => $code, 'login' => rawurlencode( $user_login ) ), wp_login_url() );
 
 		$title    = sprintf( __( '[%s] Activate Your Account', 'theme-my-login' ), $blogname );
 		$message  = sprintf( __( 'Thanks for registering at %s! To complete the activation of your account please click the following link: ', 'theme-my-login' ), $blogname ) . "\r\n\r\n";
@@ -426,7 +443,7 @@ class Theme_My_Login_User_Moderation extends Theme_My_Login_Abstract {
 		$title   = apply_filters( 'user_activation_notification_title',   $title,   $user_id );
 		$message = apply_filters( 'user_activation_notification_message', $message, $activation_url, $user_id );
 
-		//return wp_mail( $user_email, $title, $message );
+		return wp_mail( $user_email, $title, $message );
 	}
 
 	/**

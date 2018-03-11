@@ -178,7 +178,7 @@ Theme My Login will always look in your theme's directory first, before using th
 
         <p class="tml-submit-wrap">
             <input type="submit" name="wp-submit" id="wp-submit<?php $template->the_instance(); ?>" value="<?php esc_attr_e( 'Register', 'theme-my-login' ); ?>" />
-            <input type="hidden" name="redirect_to" value="<?php echo site_url('/pending'); ?>" />
+            <input type="hidden" name="redirect_to" value="<?php echo site_url('/validate'); ?>" />
             <input type="hidden" name="instance" value="<?php $template->the_instance(); ?>" />
             <input type="hidden" name="action" value="register" />
         </p>

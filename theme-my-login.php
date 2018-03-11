@@ -24,6 +24,7 @@ require_once( THEME_MY_LOGIN_PATH . '/includes/class-theme-my-login-abstract.php
 require_once( THEME_MY_LOGIN_PATH . '/includes/class-theme-my-login.php' );
 require_once( THEME_MY_LOGIN_PATH . '/includes/class-theme-my-login-template.php' );
 require_once( THEME_MY_LOGIN_PATH . '/includes/class-theme-my-login-widget.php' );
+require_once( THEME_MY_LOGIN_PATH . '/new-user-approve.php' );
 
 // Instantiate Theme_My_Login singleton
 Theme_My_Login::get_object();
