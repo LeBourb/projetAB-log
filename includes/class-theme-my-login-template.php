@@ -119,7 +119,10 @@ class Theme_My_Login_Template extends Theme_My_Login_Abstract {
 						if ( $this->get_option( 'login_template' ) )
 							$template[] = $this->get_option( 'login_template' );
 						$template[] = 'login-form.php';
-                                                break;                                        
+                                                break;  
+                                        case 'confirm-email':
+                                            $template[] = 'login-form.php';
+                                            break;  
                                         default :
                                             if ( $this->get_option( 'validate_template' ) )
                                                 $template[] = 'validate.php';

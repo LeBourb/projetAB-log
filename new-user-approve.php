@@ -50,8 +50,8 @@ class pw_new_user_approve {
 		//add_action( 'register_post', array( $this, 'request_admin_approval_email' ), 10, 3 );
 		//add_action( 'register_post', array( $this, 'create_new_user' ), 10, 3 );
 		//( 'lostpassword_post', array( $this, 'lost_password' ) );
-		add_action( 'user_register', array( $this, 'add_user_status' ) );
-		add_action( 'user_register', array( $this, 'request_admin_approval_email_2' ) );
+		add_action( 'register_new_user', array( $this, 'add_user_status' ) , 300 );
+		add_action( 'register_new_user', array( $this, 'request_admin_approval_email_2' ) , 400 );
 		add_action( 'new_user_approve_approve_user', array( $this, 'approve_user' ) );
 		add_action( 'new_user_approve_deny_user', array( $this, 'deny_user' ) );
 		add_action( 'new_user_approve_deny_user', array( $this, 'update_deny_status' ) );
@@ -236,7 +236,7 @@ class pw_new_user_approve {
 	public function validate_status_update( $do_update, $user_id, $status ) {
 		$current_status = pw_new_user_approve()->get_user_status( $user_id );
 
-		if ( $status == 'approve' ) {
+		if ( $status == 'approve' || $status == 'confirm-email') {
 			$new_status = 'approved';
 		} else {
 			$new_status = 'denied';
@@ -742,7 +742,12 @@ class pw_new_user_approve {
 			$status = 'confirm-email';
 		}
 
-		$status = apply_filters( 'new_user_approve_default_status', $status, $user_id );
+    /*$wpdb->update( 
+        $wpdb->users, //table name                 
+            array( 'user_activation_key' => $code ), // string    ),                               
+            array('ID' => $user->ID)    
+        );*/
+		//$status = apply_filters( 'new_user_approve_default_status', $status, $user_id );
 
 		update_user_meta( $user_id, 'pw_user_status', $status );
 	}

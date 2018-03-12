@@ -46,7 +46,8 @@ class pw_new_user_approve_user_list {
 	 * @uses load-users.php
 	 */
 	public function update_action() {
-		if ( isset( $_GET['action'] ) && in_array( $_GET['action'], array( 'approve', 'deny' ) ) && !isset( $_GET['new_role'] ) ) {
+                //print('*********************************** Actions is ' . $_GET['action'] . ' ***************');
+		if ( isset( $_GET['action'] ) && in_array( $_GET['action'], array( 'approve', 'deny', 'confirm-email' ) ) && !isset( $_GET['new_role'] ) ) {
 			check_admin_referer( 'new-user-approve' );
 
 			$sendback = remove_query_arg( array( 'approved', 'denied', 'deleted', 'ids', 'pw-status-query-submit', 'new_role' ), wp_get_referer() );
@@ -63,9 +64,17 @@ class pw_new_user_approve_user_list {
 			pw_new_user_approve()->update_user_status( $user, $status );
 
 			if ( $_GET['action'] == 'approve' ) {
-				$sendback = add_query_arg( array( 'approved' => 1, 'ids' => $user ), $sendback );
-			} else {
-				$sendback = add_query_arg( array( 'denied' => 1, 'ids' => $user ), $sendback );
+                            $sendback = add_query_arg( array( 'approved' => 1, 'ids' => $user ), $sendback );
+			} /*else if ( $_GET['action'] == 'confirm-email' && isset($_GET['key']) ) {
+                            global $wpdb;  
+                            $user = check_password_reset_key($_GET['key'], $_GET['login']);
+                            if(isset($user->ID)) {
+                                
+				pw_new_user_approve()->update_user_status( $user->ID, 'approved' );
+                            }
+                        }*/
+                        else {
+                            $sendback = add_query_arg( array( 'denied' => 1, 'ids' => $user ), $sendback );
 			}
 
 			wp_redirect( $sendback );
