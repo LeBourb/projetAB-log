@@ -1,11 +1,6 @@
 <?php
 /*
- Plugin Name: New User Approve
- Plugin URI: http://www.picklewagon.com/wordpress/new-user-approve/
- Description: Allow administrators to approve users once they register. Only approved users will be allowed to access the site. For support, please go to the <a href="http://wordpress.org/support/plugin/new-user-approve">support forums</a> on wordpress.org.
- Author: Josh Harrison
- Version: 1.7.5
- Author URI: http://picklewagon.com/
+ 
  */
 
 class pw_new_user_approve {
@@ -742,12 +737,7 @@ class pw_new_user_approve {
 			$status = 'confirm-email';
 		}
 
-    /*$wpdb->update( 
-        $wpdb->users, //table name                 
-            array( 'user_activation_key' => $code ), // string    ),                               
-            array('ID' => $user->ID)    
-        );*/
-		//$status = apply_filters( 'new_user_approve_default_status', $status, $user_id );
+		$status = apply_filters( 'new_user_approve_default_status', $status, $user_id );
 
 		update_user_meta( $user_id, 'pw_user_status', $status );
 	}

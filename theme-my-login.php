@@ -1,12 +1,12 @@
 <?php
 /*
-Plugin Name: Theme My Login
-Plugin URI: http://www.jfarthing.com/extend/wordpress-plugins/theme-my-login/
+Plugin Name: Atelier Bourgeons Login
+Plugin URI: 
 Description: Themes the WordPress login, registration and forgot password pages according to your theme.
 Version: 6.4.10
 Author: Jeff Farthing
-Author URI: http://www.jfarthing.com
-Text Domain: theme-my-login
+Author URI: 
+Text Domain: theme-my-login-ab
 Domain Path: /languages
 */
 

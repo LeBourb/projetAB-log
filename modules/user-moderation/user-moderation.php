@@ -418,10 +418,10 @@ class Theme_My_Login_User_Moderation extends Theme_My_Login_Abstract {
                 //$key = wp_generate_password( 20, false );
                 $code = sha1( $user_id . time() );    
                 
-                $wpdb->update( 
+               /* $wpdb->update( 
                     'wp_users', //table name     
                         array( 'user_activation_key' => $code ) // string    ),                               
-                    );
+                    );*/
 
 		// Set the activation key for the user
 		//$wpdb->update( $wpdb->users, array( 'user_activation_key' => $key ), array( 'user_login' => $user->user_login ) );

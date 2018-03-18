@@ -678,13 +678,13 @@ class Theme_My_Login_Custom_Email extends Theme_My_Login_Abstract {
 	 * @param int $user_id The user's ID
 	 * @return string The filtered message
 	 */
-	public function user_approval_notification_message_filter( $message, $key, $user_id ) {
+	public function user_approval_notification_message_filter( $message, $user_id ) {
 		$_message = $this->get_option( array( 'user_approval', 'message' ) );
 		if ( ! empty( $_message ) ) {
 			$user = get_user_by( 'id', $user_id );
 			$message = Theme_My_Login_Common::replace_vars( $_message, $user_id, array(
 				'%loginurl%' => Theme_My_Login::get_object()->get_page_link( 'login' ),
-				'%reseturl%' => site_url( "wp-login.php?action=rp&key=$key&login=" . rawurlencode( $user->user_login ), 'login' )
+				'%reseturl%' => site_url( "wp-login.php", 'login' )
 			) );
 		}
 		return $message;
@@ -857,17 +857,17 @@ class Theme_My_Login_Custom_Email extends Theme_My_Login_Abstract {
 			return;
 
 		// Generate something random for a password reset key
-		$key = wp_generate_password( 20, false );
+		//$key = wp_generate_password( 20, false );
 
-		do_action( 'retrieve_password_key', $user->user_login, $key );
+		//do_action( 'retrieve_password_key', $user->user_login, $key );
 
 		// Now insert the key, hashed, into the DB
 		require_once ABSPATH . WPINC . '/class-phpass.php';
-		$wp_hasher = new PasswordHash( 8, true );
+		//$wp_hasher = new PasswordHash( 8, true );
 
-		$hashed = time() . ':' . $wp_hasher->HashPassword( $key );
-		$wpdb->update( $wpdb->users, array( 'user_activation_key' => $hashed ), array( 'user_login' => $user->user_login ) );
-
+		//$hashed = time() . ':' . $wp_hasher->HashPassword( $key );
+		//$wpdb->update( $wpdb->users, array( 'user_activation_key' => $hashed ), array( 'user_login' => $user->user_login ) );
+/*
 		if ( apply_filters( 'send_new_user_notification', true ) ) {
 			$message  = sprintf( __( 'Username: %s', 'theme-my-login' ), $user->user_login     ) . "\r\n\r\n";
 			$message .= __( 'To set your password, visit the following address:', 'theme-my-login' ) . "\r\n\r\n";
@@ -881,7 +881,7 @@ class Theme_My_Login_Custom_Email extends Theme_My_Login_Abstract {
 			$message = apply_filters( 'new_user_notification_message', $message, $key, $user_id );
 
 			wp_mail( $user->user_email, $title, $message );
-		}
+		}*/
 	}
 
 	/**

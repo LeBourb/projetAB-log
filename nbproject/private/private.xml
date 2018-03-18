@@ -17,10 +17,10 @@
             <file>file:/C:/Users/smash/wwwpro/plugins/theme-my-login/templates/pending.php</file>
             <file>file:/C:/Users/smash/wwwpro/plugins/theme-my-login/modules/themed-profiles/admin/themed-profiles-admin.php</file>
             <file>file:/C:/Users/smash/wwwpro/plugins/theme-my-login/templates/ms-signup-user-form.php</file>
-            <file>file:/C:/Users/smash/wwwpro/plugins/theme-my-login/modules/user-moderation/admin/user-moderation-admin.php</file>
             <file>file:/C:/Users/smash/wwwpro/plugins/theme-my-login/modules/security/security.php</file>
             <file>file:/C:/Users/smash/wwwpro/plugins/theme-my-login/modules/custom-email/custom-email.php</file>
             <file>file:/C:/Users/smash/wwwpro/plugins/theme-my-login/modules/custom-user-links/admin/custom-user-links-admin.php</file>
+            <file>file:/C:/Users/smash/wwwpro/plugins/theme-my-login/new-user-approve.php</file>
             <file>file:/C:/Users/smash/wwwpro/plugins/theme-my-login/modules/custom-user-links/custom-user-links.php</file>
             <file>file:/C:/Users/smash/wwwpro/plugins/theme-my-login/modules/recaptcha/recaptcha.php</file>
             <file>file:/C:/Users/smash/wwwpro/plugins/theme-my-login/readme.txt</file>
@@ -29,7 +29,6 @@
             <file>file:/C:/Users/smash/wwwpro/plugins/theme-my-login/templates/register-form.php</file>
             <file>file:/C:/Users/smash/wwwpro/plugins/theme-my-login/modules/custom-passwords/custom-passwords.php</file>
             <file>file:/C:/Users/smash/wwwpro/plugins/theme-my-login/templates/profile-form.php</file>
-            <file>file:/C:/Users/smash/wwwpro/plugins/theme-my-login/modules/user-moderation/user-moderation.php</file>
             <file>file:/C:/Users/smash/wwwpro/plugins/theme-my-login/includes/class-theme-my-login.php</file>
             <file>file:/C:/Users/smash/wwwpro/plugins/theme-my-login/modules/custom-redirection/admin/custom-redirection-admin.php</file>
             <file>file:/C:/Users/smash/wwwpro/plugins/theme-my-login/modules/security/admin/security-admin.php</file>
