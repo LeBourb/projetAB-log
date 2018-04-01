@@ -63,16 +63,17 @@ Theme My Login will always look in your theme's directory first, before using th
     height: auto;
     display: flex;
     justify-content: center;
+    counter-reset: step;
 }
 #progressbar li {
-	list-style-type: none;
+    list-style-type: none;
     color: white;
     text-transform: uppercase;
     font-size: 9px;
     width: 23em;
     float: left;
-    position: relative;
-    text-align: center;
+    /*position: relative;
+    text-align: center;*/
 }
 #progressbar li:before {
 	content: counter(step);
@@ -85,16 +86,18 @@ Theme My Login will always look in your theme's directory first, before using th
 	background: white;
 	border-radius: 3px;
 	margin: 0 auto 5px auto;
+        text-align: center;
 }
 /*progressbar connectors*/
 #progressbar li:after {
 	content: '';
-	width: 100%;
+	width: 50%;
 	height: 2px;
 	background: white;
 	position: absolute;
-	left: -50%;
+	left: 25%;
 	top: 9px;
+        z-index: -1;
 }
 #progressbar li:first-child:after {
 	/*connector not needed before the first step*/
