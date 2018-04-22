@@ -66,11 +66,12 @@ class Theme_My_Login_Custom_Passwords extends Theme_My_Login_Abstract {
 		$template = Theme_My_Login::get_object()->get_active_instance();
 		?>
 		<p class="tml-user-pass1-wrap">
-			<label for="pass1<?php $template->the_instance(); ?>"><?php _e( 'Password', 'theme-my-login' ); ?></label><span class="required">*</span>
+			<label for="pass1<?php $template->the_instance(); ?>"><?php _e( 'Password', 'theme-my-login' ); ?><span class="required">*</span></label>
+                        <i>（お好きなパスワードを設定してください。今後、当サイトにログインする際にはこのパスワードが必要ですので、忘れないようご注意ください。）</i>
 			<input autocomplete="off" name="pass1" id="pass1<?php $template->the_instance(); ?>" class="input" size="20" value="" type="password" />
 		</p>
 		<p class="tml-user-pass2-wrap">
-			<label for="pass2<?php $template->the_instance(); ?>"><?php _e( 'Confirm Password', 'theme-my-login' ); ?></label><span class="required">*</span> 
+			<label for="pass2<?php $template->the_instance(); ?>"><?php _e( 'Confirm Password', 'theme-my-login' ); ?><span class="required">*</span> </label>
 			<input autocomplete="off" name="pass2" id="pass2<?php $template->the_instance(); ?>" class="input" size="20" value="" type="password" />
 		</p>
 		<?php

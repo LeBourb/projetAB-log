@@ -82,11 +82,11 @@ class Theme_My_Login_Template extends Theme_My_Login_Abstract {
 	public function display( $action = '' ) {
 		if ( empty( $action ) )
 			$action = $this->get_option( 'default_action' );
-
+                
 		ob_start();
-		echo $this->get_option( 'before_widget' );
-		if ( $this->get_option( 'show_title' ) )
-			echo $this->get_option( 'before_title' ) . $this->get_title( $action ) . $this->get_option( 'after_title' ) . "\n";
+		//echo $this->get_option( 'before_widget' );
+		//if ( $this->get_option( 'show_title' ) )
+			//echo $this->get_option( 'before_title' ) . $this->get_title( $action ) . $this->get_option( 'after_title' ) . "\n";
 		// Is there a specified template?
 		if ( has_action( 'tml_display_' . $action ) ) {
 			do_action_ref_array( 'tml_display_' . $action, array( &$this ) );
@@ -162,7 +162,7 @@ class Theme_My_Login_Template extends Theme_My_Login_Abstract {
 			} else {
 				switch ( $action ) {
 					case 'register':
-						$title = __( 'Register', 'theme-my-login' );
+						//$title = __( 'Register', 'theme-my-login' );
 						break;
 					case 'lostpassword':
 					case 'retrievepassword':
@@ -449,7 +449,6 @@ class Theme_My_Login_Template extends Theme_My_Login_Abstract {
 	 * @return string|bool Template path if found, false if not
 	 */
 	public function get_template( $template_names, $load = true, $args = array() ) {
-
 		$theme_my_login = Theme_My_Login::get_object();
 
 		// User friendly access to this
@@ -459,7 +458,7 @@ class Theme_My_Login_Template extends Theme_My_Login_Abstract {
 		$current_user = wp_get_current_user();
 
 		extract( apply_filters_ref_array( 'tml_template_args', array( $args, $this ) ) );
-
+                
 		$template_paths = apply_filters( 'tml_template_paths', array(
 			get_stylesheet_directory() . '/theme-my-login',
 			get_stylesheet_directory(),

@@ -6,11 +6,11 @@ Theme My Login will always look in your theme's directory first, before using th
 ?>
 <!-- progressbar -->
   <ul id="progressbar">
-    <li class="active">Select Account Type</li>
-    <li>Enter Required Informations</li>    
+    <li class="active">アカウントの種類を選択</li>
+    <li>必要項目の入力</li>    
   </ul>
-<div class="tml tml-register" id="theme-my-login<?php $template->the_instance(); ?>">
-	<?php $template->the_action_template_message( 'register' ); ?>
+<div class="tml tml-register" id="theme-my-login<?php $template->the_instance(); ?>" style="padding-bottom: 3em;">
+	<?php //$template->the_action_template_message( 'register' ); ?>
 	<?php $template->the_errors(); ?>
     <?php
 
@@ -27,14 +27,15 @@ Theme My Login will always look in your theme's directory first, before using th
     
     #register-box fieldset {
         background: transparent;
-        display: flex;
     }
     
     
     #register-box .btn {
         margin-left: auto;
         width: 18em;
+        display:block;
         margin-right: auto;
+        white-space: normal;
     }
     
 
@@ -70,10 +71,11 @@ Theme My Login will always look in your theme's directory first, before using th
     color: white;
     text-transform: uppercase;
     font-size: 9px;
-    width: 23em;
+    width: 50%;
     float: left;
-    /*position: relative;
-    text-align: center;*/
+    margin-left: 1em;
+    margin-right: 1em;
+    text-align: center;
 }
 #progressbar li:before {
 	content: counter(step);
@@ -119,12 +121,12 @@ Theme My Login will always look in your theme's directory first, before using th
   
   <!-- fieldsets -->
   <fieldset id="select-account-type">
-    <h2 class="fs-title">Select your account type</h2>
-    <button id="user-select-shop" type="button" name="next" class="next action-button btn btn-lg btn-danger smoothScroll wow fadeInUp animated" value="Next" >Professional Account</button>
-    <button id="user-select-personnal" type="button" name="next" class="next action-button btn btn-lg btn-danger smoothScroll wow fadeInUp animated" value="Next" >Personnal Account</button>
+    <h2 class="fs-title">登録するアカウントの種類を選んでください</h2>
+    <button id="user-select-shop" type="button" name="next" class="next action-button btn btn-lg btn-danger smoothScroll wow fadeInUp animated" value="Next" >ビジネス会員アカウント（事業者様のみ）</button>
+    <button id="user-select-personnal" type="button" name="next" class="next action-button btn btn-lg btn-danger smoothScroll wow fadeInUp animated" value="Next" >個人会員アカウント</button>
   </fieldset>
   <fieldset id="shop-account-form" style="display: none; opacity: 0;">
-    <h2 class="fs-title">Your Professional Account</h2>    
+    <h2 class="fs-title">ビジネス会員アカウント</h2>    
     <form name="registerform" id="registerform<?php $template->the_instance(); ?>" action="<?php $template->the_action_url( 'register', 'login_post' ); ?>" method="post">
         <input type="hidden" name="account-type" class="" value="professional" />
         <?php if ( 'email' != $theme_my_login->get_option( 'login_type' ) ) : ?>
@@ -153,7 +155,7 @@ Theme My Login will always look in your theme's directory first, before using th
     <?php $template->the_action_links( array( 'register' => false ) ); ?>
   </fieldset>
   <fieldset id="personnal-account-form" style="display: none; opacity: 0;">
-    <h2 class="fs-title">Your Personnal Account</h2>    
+    <h2 class="fs-title">個人会員アカウント</h2>    
     <form name="registerform" id="registerform<?php $template->the_instance(); ?>" action="<?php $template->the_action_url( 'register', 'login_post' ); ?>" method="post">
         <input type="hidden" name="account-type" class="" value="personnal" />
         <?php if ( 'email' != $theme_my_login->get_option( 'login_type' ) ) : ?>

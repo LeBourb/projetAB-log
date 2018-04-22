@@ -108,7 +108,7 @@ class Theme_My_Login_Widget extends WP_Widget {
 
 		$actions = array(
 			'login'        => __( 'Login',         'theme-my-login' ),
-			'register'     => __( 'Register',      'theme-my-login' ),
+			'register'     => __( '',      'theme-my-login' ),
 			'lostpassword' => __( 'Lost Password', 'theme-my-login' )
 		);
 
