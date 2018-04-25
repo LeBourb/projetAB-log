@@ -434,7 +434,7 @@ class Theme_My_Login_Template extends Theme_My_Login_Abstract {
 	 */
 	public function the_action_template_message( $action = 'login', $before_message = '<p class="message">', $after_message = '</p>' ) {
 		if ( $message = self::get_action_template_message( $action ) )
-			echo $before_message . $message . $after_message;
+			echo /*$before_message .*/ $message . $after_message;
 	}
 
 	/**

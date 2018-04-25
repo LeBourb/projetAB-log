@@ -697,15 +697,20 @@ class pw_new_user_approve {
 	 */
 	public function welcome_user( $message ) {
 		if ( !isset( $_GET['action'] ) ) {
-			$welcome = nua_default_welcome_message();
+			/*$welcome = nua_default_welcome_message();
 			$welcome = nua_do_email_tags( $welcome, array(
 				'context' => 'welcome_message',
 			) );
 			$welcome = apply_filters( 'new_user_approve_welcome_message', $welcome );
-
-			if ( !empty( $welcome ) ) {
-				$message .= '<p class="message register">' . $welcome . '</p>';
-			}
+                        
+			if ( !empty( $welcome ) ) {*/
+                        $message .= '<p class="message register"> 
+                                アトリエブルジョンのログインページへようこそ。
+                                当サイトのウェブショップは、無料会員登録制です。
+                                まだアカウントをお持ちでない方は
+                                、<a href="' . Theme_My_Login::get_page_link( 'register' ) . '">こちら</a>からご登録ください。
+                                 </p>';
+			//}
 		}
 
 		if ( isset( $_GET['action'] ) && $_GET['action'] == 'register' && !$_POST ) {
