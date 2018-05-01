@@ -123,7 +123,7 @@ Theme My Login will always look in your theme's directory first, before using th
   <!-- fieldsets -->
   <fieldset id="select-account-type">
     <h2 class="fs-title">登録するアカウントの種類を選んでください</h2>
-    <button id="user-select-shop" type="button" name="next" class="next action-button btn btn-lg btn-danger smoothScroll wow fadeInUp animated" value="Next" >ビジネス会員（事業者様のみ)</button>
+    <button id="user-select-shop" type="button" name="next" class="next action-button btn btn-lg btn-danger smoothScroll wow fadeInUp animated" value="Next" >ビジネス会員<br>（事業者様のみ)</button>
     <button id="user-select-personnal" type="button" name="next" class="next action-button btn btn-lg btn-danger smoothScroll wow fadeInUp animated" value="Next" >個人会員</button>
   </fieldset>
   <fieldset id="shop-account-form" style="display: none; opacity: 0;">

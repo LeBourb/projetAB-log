@@ -114,10 +114,10 @@ class Theme_My_Login extends Theme_My_Login_Abstract {
 	 */
 	public static function default_pages() {
 		return apply_filters( 'tml_default_pages', array(
-			'login'        => __( 'Log In'        , 'theme-my-login' ),
+			'login'        => __( 'ログイン'        , 'theme-my-login' ),
 			'logout'       => __( 'Log Out'       , 'theme-my-login' ),
-			'register'     => __( ''      , 'theme-my-login' ),
-			'lostpassword' => __( 'Lost Password' , 'theme-my-login' ),
+			'register'     => __( '新規登録'      , 'theme-my-login' ),
+			'lostpassword' => __( 'パスワードを忘れた方はこちら' , 'theme-my-login' ),
 			'resetpass'    => __( 'Reset Password', 'theme-my-login' )
 		) );
 	}

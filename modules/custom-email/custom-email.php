@@ -110,9 +110,9 @@ class Theme_My_Login_Custom_Email extends Theme_My_Login_Abstract {
 	 * @access protected
 	 */
 	protected function load() {
-		add_filter( 'wp_mail_from',         array( $this, 'mail_from_filter'         ) );
-		add_filter( 'wp_mail_from_name',    array( $this, 'mail_from_name_filter'    ) );
-		add_filter( 'wp_mail_content_type', array( $this, 'mail_content_type_filter' ) );
+		//add_filter( 'wp_mail_from',         array( $this, 'mail_from_filter'         ) );
+		//add_filter( 'wp_mail_from_name',    array( $this, 'mail_from_name_filter'    ) );
+		//add_filter( 'wp_mail_content_type', array( $this, 'mail_content_type_filter' ) );
 
 		add_action( 'retrieve_password',         array( $this, 'apply_retrieve_pass_filters'  ) );
 		add_action( 'password_reset',            array( $this, 'apply_password_reset_filters' ) );

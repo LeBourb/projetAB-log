@@ -8,6 +8,6 @@
 
 ?>
 <div class="tml tml-login" id="theme-my-login<?php $template->the_instance(); ?>">
-    <h2><?php _e( 'Registration Succeeded!', 'theme-my-login' ); ?></h2>
-    <p><?php _e( 'We are currently reviewing your acccount information. You will receive an email once your account is approved by our team', 'theme-my-login' ); ?></p>
+    <h2><?php _e( '会員登録のご申請、誠にありがとうございます！', 'theme-my-login' ); ?></h2>
+    <p><?php _e( '※ ビジネス会員のご登録には、サイト管理者による会員認証が必要です。ご登録内容の確認後、当方より改めてメールをお送りします。今しばらくお待ちくださいませ。', 'theme-my-login' ); ?></p>
 </div>

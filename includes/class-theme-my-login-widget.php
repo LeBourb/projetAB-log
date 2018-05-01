@@ -107,9 +107,9 @@ class Theme_My_Login_Widget extends WP_Widget {
 		$instance = wp_parse_args( $instance, $defaults );
 
 		$actions = array(
-			'login'        => __( 'Login',         'theme-my-login' ),
-			'register'     => __( '',      'theme-my-login' ),
-			'lostpassword' => __( 'Lost Password', 'theme-my-login' )
+			'login'        => __( 'ログイン',         'theme-my-login' ),
+			'register'     => __( '新規登録',      'theme-my-login' ),
+			'lostpassword' => __( 'パスワードを忘れた方はこちら', 'theme-my-login' )
 		);
 
 		echo '<p>' . __( 'Default Action', 'theme-my-login' ) . '<br /><select name="' . $this->get_field_name( 'default_action' ) . '" id="' . $this->get_field_id( 'default_action' ) . '">';

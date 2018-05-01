@@ -168,10 +168,10 @@ class Theme_My_Login_Template extends Theme_My_Login_Abstract {
 					case 'retrievepassword':
 					case 'resetpass':
 					case 'rp':
-						$title = __( 'Lost Password', 'theme-my-login' );
+						$title = __( 'パスワードを忘れた方はこちら', 'theme-my-login' );
 						break;
 					case 'login':
-						$title = __( 'Log In', 'theme-my-login' );
+						$title = __( 'ログイン', 'theme-my-login' );
                                         default:
                                             $title='';
 				}

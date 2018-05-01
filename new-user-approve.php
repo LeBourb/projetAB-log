@@ -254,7 +254,7 @@ class pw_new_user_approve {
 		$message = '';
 
 		if ( $status == 'pending' ) {
-			$message = __( '<strong>ERROR</strong>: Your account is still pending approval.', 'new-user-approve' );
+			$message = __( '<strong>エラー</strong>: 現在お客さまのアカウントは、認証待ちの状態です。恐れ入りますが、当方より認証結果のご案内メールが届くまで今しばらくお待ちくださいませ。', 'new-user-approve' );
 			$message = apply_filters( 'new_user_approve_pending_error', $message );
 		} else if ( $status == 'denied' ) {
 			$message = __( '<strong>ERROR</strong>: Your account has been denied access to this site.', 'new-user-approve' );
@@ -620,12 +620,14 @@ class pw_new_user_approve {
 		if ( empty( $admin_email ) ) {
 			$admin_email = 'support@' . $_SERVER['SERVER_NAME'];
 		}
-
-		$from_name = get_option( 'blogname' );
+                $admin_email = "contact@atelierbourgeons.com";
+		$from_name = "atelier Bourgeons アトリエブルジョン";
 
 		$headers = array(
 			"From: \"{$from_name}\" <{$admin_email}>\n",
 		);
+                $headers[] = 'MIME-Version: 1.0;';
+                $headers[] = 'Content-Type: text/html; charset=UTF-8';
 
 		$headers = apply_filters( 'new_user_approve_email_header', $headers );
 
@@ -783,3 +785,7 @@ function pw_new_user_approve() {
 }
 
 pw_new_user_approve();
+
+function wp_new_user_notification( $user_id, $deprecated = null, $notify = '' ) {
+    return null;
+}
