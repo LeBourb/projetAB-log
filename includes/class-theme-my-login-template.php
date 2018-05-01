@@ -162,16 +162,18 @@ class Theme_My_Login_Template extends Theme_My_Login_Abstract {
 			} else {
 				switch ( $action ) {
 					case 'register':
-						//$title = __( 'Register', 'theme-my-login' );
+						$title = '新規登録';
 						break;
 					case 'lostpassword':
+                                            $title = 'パスワードを忘れた方はこちら';
+                                            break;
 					case 'retrievepassword':
 					case 'resetpass':
 					case 'rp':
-						$title = __( 'パスワードを忘れた方はこちら', 'theme-my-login' );
+						$title = 'パスワードを忘れた方はこちら';
 						break;
 					case 'login':
-						$title = __( 'ログイン', 'theme-my-login' );
+						$title = 'ログイン';
                                         default:
                                             $title='';
 				}

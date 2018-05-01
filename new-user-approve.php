@@ -259,7 +259,11 @@ class pw_new_user_approve {
 		} else if ( $status == 'denied' ) {
 			$message = __( '<strong>ERROR</strong>: Your account has been denied access to this site.', 'new-user-approve' );
 			$message = apply_filters( 'new_user_approve_denied_error', $message );
+		} else if ( $status == 'confirm-email' ) {
+			$message = apply_filters( 'new_user_confirm_email_error', $message );
 		}
+                
+                
 
 		$message = apply_filters( 'new_user_approve_default_authentication_message', $message, $status );
 

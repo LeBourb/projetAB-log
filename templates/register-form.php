@@ -142,7 +142,10 @@ Theme My Login will always look in your theme's directory first, before using th
             <input type="text" name="user_email" id="user_email<?php $template->the_instance(); ?>" class="input" value="<?php $template->the_posted_value( 'user_email' ); ?>" size="20" />
         </p>
        
-        <?php do_action( 'register_form' ); ?>
+        <?php 
+            remove_action( 'register_form'    , 'wsl_render_auth_widget_in_wp_register_form' );
+            do_action( 'register_form' );
+        ?>
 
         <p class="tml-registration-confirmation" id="reg_passmail<?php $template->the_instance(); ?>"><?php echo apply_filters( 'tml_register_passmail_template_message', __( 'Registration confirmation will be e-mailed to you.', 'theme-my-login' ) ); ?></p>
 
@@ -156,6 +159,7 @@ Theme My Login will always look in your theme's directory first, before using th
     <?php $template->the_action_links( array( 'register' => false ) ); ?>
   </fieldset>
   <fieldset id="personnal-account-form" style="display: none; opacity: 0;">
+    <?php wsl_render_auth_widget_in_wp_register_form(); ?>
     <h2 class="fs-title">個人会員アカウント</h2>    
     <form name="registerform" id="registerform<?php $template->the_instance(); ?>" action="<?php $template->the_action_url( 'register', 'login_post' ); ?>" method="post">
         <input type="hidden" name="account-type" class="" value="personnal" />
@@ -172,11 +176,11 @@ Theme My Login will always look in your theme's directory first, before using th
         </p>
         
         <p class="tml-user-pass1-wrap">
-            <label for="pass1<?php $template->the_instance(); ?>"><?php _e( 'Password', 'theme-my-login' ); ?></label><span class="required">*</span>
+            <label for="pass1<?php $template->the_instance(); ?>"><?php _e( 'Password', 'theme-my-login' ); ?><span class="required">*</span></label>
             <input autocomplete="off" name="pass1" id="pass1<?php $template->the_instance(); ?>" class="input" size="20" value="" type="password" />
         </p>
         <p class="tml-user-pass2-wrap">
-            <label for="pass2<?php $template->the_instance(); ?>"><?php _e( 'Confirm Password', 'theme-my-login' ); ?></label><span class="required">*</span> 
+            <label for="pass2<?php $template->the_instance(); ?>"><?php _e( 'Confirm Password', 'theme-my-login' ); ?><span class="required">*</span> </label>
             <input autocomplete="off" name="pass2" id="pass2<?php $template->the_instance(); ?>" class="input" size="20" value="" type="password" />
         </p>
 
