@@ -200,6 +200,7 @@ Theme My Login will always look in your theme's directory first, before using th
 
 
 <script>
+    (function($) {
     //jQuery time
     var current_fs, next_fs, previous_fs; //fieldsets
     var left, opacity, scale; //fieldset properties which we will animate
@@ -275,4 +276,5 @@ Theme My Login will always look in your theme's directory first, before using th
         }
    
     }); 
+    }(jQuery));
 </script>

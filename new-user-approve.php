@@ -260,6 +260,7 @@ class pw_new_user_approve {
 			$message = __( '<strong>ERROR</strong>: Your account has been denied access to this site.', 'new-user-approve' );
 			$message = apply_filters( 'new_user_approve_denied_error', $message );
 		} else if ( $status == 'confirm-email' ) {
+			$message = __( '<strong>エラー:</strong>このメールアドレスでの会員登録は、まだ完了していません。当方から個別にお送りしたメール内に記載されているURLをクリックし、登録を完了してください。もしメールが届いていない場合は、お手数ですがcontact@atelierbourgeons.comまでお問い合わせください。', 'new-user-approve' );
 			$message = apply_filters( 'new_user_confirm_email_error', $message );
 		}
                 
