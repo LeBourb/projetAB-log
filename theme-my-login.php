@@ -1,13 +1,14 @@
 <?php
 /*
 Plugin Name: Atelier Bourgeons Login
-Plugin URI: 
+Plugin URI:  http://atelierbourgeons.com/plugin-login
+Depends:  WooCommerce
 Description: Themes the WordPress login, registration and forgot password pages according to your theme.
 Version: 6.4.10
-Author: Jeff Farthing
+Author: Lebourb
 Author URI: 
 Text Domain: theme-my-login-ab
-Domain Path: /languages
+Domain Path:
 */
 
 // Allow custom functions file 
