@@ -222,13 +222,18 @@ class Theme_My_Login_Template extends Theme_My_Login_Abstract {
 				$errors = '';
 				$messages = '';
 				foreach ( $wp_error->get_error_codes() as $code ) {
-					$severity = $wp_error->get_error_data( $code );
-					foreach ( $wp_error->get_error_messages( $code ) as $error ) {
-						if ( 'message' == $severity )
-							$messages .= '    ' . $error . "<br />\n";
-						else
-							$errors .= '    ' . $error . "<br />\n";
-					}
+					if($code == 'incorrect_password') {
+                                            $error = 'エラー: メールアドレスまたはパスワードが正しくありません。<a href="' . Theme_My_Login::get_page_link( 'lostpassword' ) . '">パスワードをお忘れの場合はこちら</a>';
+                                            $errors .= '    ' . $error . "<br />\n";
+                                        }else {
+                                            $severity = $wp_error->get_error_data( $code ); 
+                                            foreach ( $wp_error->get_error_messages( $code ) as $error ) {
+                                                    if ( 'message' == $severity )
+                                                            $messages .= '    ' . $error . "<br />\n";
+                                                    else
+                                                            $errors .= '    ' . $error . "<br />\n";
+                                            }
+                                        }
 				}
 				if ( ! empty( $errors ) )
 					$output .= '<p class="error">' . apply_filters( 'login_errors', $errors ) . "</p>\n";
