@@ -2,6 +2,8 @@
 /*
  
  */
+if (class_exists('pw_new_user_approve'))
+    return;
 
 class pw_new_user_approve {
 
@@ -431,7 +433,9 @@ class pw_new_user_approve {
 		$admin_url = apply_filters( 'new_user_approve_admin_link', $default_admin_url );
 
 		/* send email to admin for approval */
-		$message = apply_filters( 'new_user_approve_request_approval_message_default', nua_default_notification_message() );
+                do_action('woocommerce_registration_approval_request_pro_notification',$user_login,$user_email,$admin_url );
+                
+		/*$message = apply_filters( 'new_user_approve_request_approval_message_default', nua_default_notification_message() );
 
 		$message = nua_do_email_tags( $message, array(
 			'context' => 'request_admin_approval_email',
@@ -449,6 +453,8 @@ class pw_new_user_approve {
 
 		// send the mail
 		wp_mail( $to, $subject, $message, $this->email_message_headers() );
+                 * 
+                 */
 	}
 
 	/**
@@ -551,6 +557,13 @@ class pw_new_user_approve {
 	public function approve_user( $user_id ) {
 		$user = new WP_User( $user_id );
 
+                // change usermeta tag in database to approved
+		update_user_meta( $user->ID, 'pw_user_status', 'approved' );
+
+		do_action( 'new_user_approve_user_approved', $user );
+                
+                do_action('woocommerce_registration_approved_pro_notification',$user->user_email);
+                /*
 		wp_cache_delete( $user->ID, 'users' );
 		wp_cache_delete( $user->data->user_login, 'userlogins' );
 
@@ -575,10 +588,9 @@ class pw_new_user_approve {
 		// send the mail
 		wp_mail( $user_email, $subject, $message, $this->email_message_headers() );
 
-		// change usermeta tag in database to approved
-		update_user_meta( $user->ID, 'pw_user_status', 'approved' );
-
-		do_action( 'new_user_approve_user_approved', $user );
+		
+                 * 
+                 */
 	}
 
 	/**
@@ -590,7 +602,9 @@ class pw_new_user_approve {
 		$user = new WP_User( $user_id );
 
 		// send email to user telling of denial
-		$user_email = stripslashes( $user->user_email );
+                // is Pro ?
+                do_action('woocommerce_registration_denied_pro_notification',$user->user_email);
+		/*$user_email = stripslashes( $user->user_email );
 
 		// format the message
 		$message = nua_default_deny_user_message();
@@ -604,6 +618,8 @@ class pw_new_user_approve {
 
 		// send the mail
 		wp_mail( $user_email, $subject, $message, $this->email_message_headers() );
+                 * */
+                 
 	}
 
 	/**
@@ -620,7 +636,7 @@ class pw_new_user_approve {
 		do_action( 'new_user_approve_user_denied', $user );
 	}
 
-	public function email_message_headers() {
+	/*public function email_message_headers() {
 		$admin_email = get_option( 'admin_email' );
 		if ( empty( $admin_email ) ) {
 			$admin_email = 'support@' . $_SERVER['SERVER_NAME'];
@@ -638,7 +654,7 @@ class pw_new_user_approve {
 
 		return $headers;
 	}
-
+        */
 	/**
 	 * Display a message to the user after they have registered
 	 *
@@ -742,16 +758,33 @@ class pw_new_user_approve {
 	 * @param int $user_id
 	 */
 	public function add_user_status( $user_id ) {
-		$status = 'pending';
+            $status = 'pending';
 
-		// This check needs to happen when a user is created in the admin
-		if (  $_POST['account-type'] == 'personnal'  || ( isset( $_REQUEST['action'] ) && 'createuser' == $_REQUEST['action'] ) ) {
-			$status = 'confirm-email';
-		}
+            // This check needs to happen when a user is created in the admin
+            if (  $_POST['account-type'] == 'personnal'  || ( isset( $_REQUEST['action'] ) && 'createuser' == $_REQUEST['action'] ) ) {
+                    $status = 'confirm-email';
+            }
 
-		$status = apply_filters( 'new_user_approve_default_status', $status, $user_id );
+            $message = null;
+            $txt = null;
+            if ($status == "confirm-email") {
+                //$subject = '【ご登録完了まであと少しです】/atelier Bourgeons （ｱﾄﾘｴﾌﾞﾙｼﾞｮﾝ）';   
+                $code = sha1( $user->ID . time() ); 
+                global $wpdb;
+                $wpdb->update( $wpdb->users, array( 'user_activation_key' => $code ), array( 'ID' => $user->ID ) );
+                //$blogname = wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
+                $activation_url = add_query_arg( array( 'action' => 'confirm-email', 'key' => $code, 'user' => $user->ID), wp_login_url() );
+                //$message = mail_new_user_confirm_email($user,$activation_url);
+                do_action('woocommerce_registration_new_user_confirm_email',$user->user_email, $activation_url);
+            }else {
+                do_action('woocommerce_registration_new_user_checking_pro',$user->user_email);
+                //$subject = '【会員認証の完了までしばらくお待ちください】/atelier Bourgeons （ｱﾄﾘｴﾌﾞﾙｼﾞｮﾝ）';
+                //$message = mail_new_user_checking($user);
+            }
 
-		update_user_meta( $user_id, 'pw_user_status', $status );
+            //$status = apply_filters( 'new_user_approve_default_status', $status, $user_id );
+
+            update_user_meta( $user_id, 'pw_user_status', $status );
 	}
 
 	/**
@@ -790,7 +823,8 @@ function pw_new_user_approve() {
 }
 
 pw_new_user_approve();
-
+/*
 function wp_new_user_notification( $user_id, $deprecated = null, $notify = '' ) {
     return null;
 }
+ */
