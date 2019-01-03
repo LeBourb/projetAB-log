@@ -159,7 +159,12 @@ Theme My Login will always look in your theme's directory first, before using th
     <?php $template->the_action_links( array( 'register' => false ) ); ?>
   </fieldset>
   <fieldset id="personnal-account-form" style="display: none; opacity: 0;">
-    <?php wsl_render_auth_widget_in_wp_register_form(); ?>
+    <?php 
+        if(function_exists('wsl_render_auth_widget_in_wp_register_form')) {
+            wsl_render_auth_widget_in_wp_register_form(); 
+        }
+        
+    ?>
     <h2 class="fs-title">個人会員アカウント</h2>    
     <form name="registerform" id="registerform<?php $template->the_instance(); ?>" action="<?php $template->the_action_url( 'register', 'login_post' ); ?>" method="post">
         <input type="hidden" name="account-type" class="" value="personnal" />
