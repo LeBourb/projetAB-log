@@ -119,11 +119,12 @@ class Theme_My_Login_Custom_Email extends Theme_My_Login_Abstract {
 		add_action( 'tml_new_user_notification', array( $this, 'apply_new_user_filters'       ) );
 
 		remove_action( 'register_new_user',      'wp_send_new_user_notifications'        );
+                remove_action( 'register_new_user',      'wp_new_user_notification'        );
 		remove_action( 'edit_user_created_user', 'wp_send_new_user_notifications', 10, 2 );
 		remove_action( 'after_password_reset',   'wp_password_change_notification'       );
 
-		add_action( 'register_new_user',      array( $this, 'new_user_notification'        )        );
-		add_action( 'edit_user_created_user', array( $this, 'new_user_notification'        ), 10, 2 );
+		//add_action( 'register_new_user',      array( $this, 'new_user_notification'        )        );
+		//add_action( 'edit_user_created_user', array( $this, 'new_user_notification'        ), 10, 2 );
 		add_action( 'after_password_reset',   array( $this, 'password_change_notification' )        );
 
 		add_action( 'register_post',              array( $this, 'apply_user_moderation_notification_filters' ) );
@@ -838,7 +839,7 @@ class Theme_My_Login_Custom_Email extends Theme_My_Login_Abstract {
 		// we want to reverse this for the plain text arena of emails.
 		$blogname = wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
 
-		if ( apply_filters( 'send_new_user_admin_notification', true ) ) {
+		/*if ( apply_filters( 'send_new_user_admin_notification', true ) ) {
 			$message  = sprintf( __( 'New user registration on your site %s:', 'theme-my-login' ), $blogname   ) . "\r\n\r\n";
 			$message .= sprintf( __( 'Username: %s'                          , 'theme-my-login' ), $user->user_login ) . "\r\n\r\n";
 			$message .= sprintf( __( 'E-mail: %s'                            , 'theme-my-login' ), $user->user_email ) . "\r\n";
@@ -851,10 +852,11 @@ class Theme_My_Login_Custom_Email extends Theme_My_Login_Abstract {
 			$to       = apply_filters( 'new_user_admin_notification_mail_to', get_option( 'admin_email' ) );
 
 			@wp_mail( $to, $title, $message );
-		}
+		}*/
+                do_action('new_user_account_admin_notification',$user_id);
 
-		if ( 'admin' == $notify || empty( $notify ) )
-			return;
+		//if ( 'admin' == $notify || empty( $notify ) )
+		//	return;
 
 		// Generate something random for a password reset key
 		//$key = wp_generate_password( 20, false );

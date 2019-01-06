@@ -441,8 +441,9 @@ class Theme_My_Login extends Theme_My_Login_Abstract {
 							$user_login = isset( $_POST['user_login'] ) ? $_POST['user_login'] : '';
 						}
 						$user_email = isset( $_POST['user_email'] ) ? $_POST['user_email'] : '';
-
-						$this->errors = register_new_user( $user_login, $user_email );  
+                                                
+						$this->errors = register_new_user( $user_login, $user_email );
+                                                
 						if ( ! is_wp_error( $this->errors ) ) {
 							$redirect_to = ! empty( $_POST['redirect_to'] ) ? $_POST['redirect_to'] : site_url( 'wp-login.php?checkemail=registered' );
 							wp_safe_redirect( $redirect_to );

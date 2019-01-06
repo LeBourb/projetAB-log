@@ -63,7 +63,7 @@ class Theme_My_Login_User_Moderation extends Theme_My_Login_Abstract {
 		if ( is_multisite() )
 			return;
 
-		if ( in_array( $this->get_option( 'type' ), array( 'admin', 'email' ) ) ) {
+		//if ( in_array( $this->get_option( 'type' ), array( 'admin', 'email' ) ) ) {
 
 			add_action( 'register_post',         array( $this, 'register_post'         )      );
 			add_filter( 'registration_redirect', array( $this, 'registration_redirect' ), 100 );
@@ -74,11 +74,11 @@ class Theme_My_Login_User_Moderation extends Theme_My_Login_Abstract {
 			add_action( 'tml_request',            array( $this, 'action_messages'    ) );
 			add_action( 'tml_new_user_activated', array( $this, 'new_user_activated' ) );
 
-			if ( 'email' == $this->get_option( 'type' ) ) {
+			//if ( 'email' == $this->get_option( 'type' ) ) {
 				add_action( 'tml_request_activate',       array( $this, 'user_activation' ) );
-				add_action( 'tml_request_sendactivation', array( $this, 'send_activation' ) );
-			}
-		}
+				//add_action( 'tml_request_sendactivation', array( $this, 'send_activation' ) );
+			//}
+		//}
 	}
 
 	/**
@@ -93,7 +93,7 @@ class Theme_My_Login_User_Moderation extends Theme_My_Login_Abstract {
 			remove_action( 'register_new_user', 'wp_send_new_user_notifications' );
 
 		// Remove Custom Email new user notification
-		if ( class_exists( 'Theme_My_Login_Custom_Email' ) ) {
+		/*if ( class_exists( 'Theme_My_Login_Custom_Email' ) ) {
 			$custom_email = Theme_My_Login_Custom_Email::get_object();
 			if ( has_action( 'register_new_user', array( $custom_email, 'new_user_notification' ) ) )
 				remove_action( 'register_new_user', array( $custom_email, 'new_user_notification' ) );
@@ -101,6 +101,8 @@ class Theme_My_Login_User_Moderation extends Theme_My_Login_Abstract {
 
 		// Moderate user upon registration
 		add_action( 'register_new_user', array( $this, 'moderate_user' ), 100 );
+                 * 
+                 */
 	}
 
 	/**
@@ -409,8 +411,7 @@ class Theme_My_Login_User_Moderation extends Theme_My_Login_Abstract {
 	public static function new_user_activation_notification( $user_id ) {
 		global $wpdb, $current_site;
 
-		$user = new WP_User( $user_id );
-
+		  /*$user = new WP_User( $user_id );
 		$user_login = stripslashes( $user->user_login );
 		$user_email = stripslashes( $user->user_email );
 
@@ -418,10 +419,10 @@ class Theme_My_Login_User_Moderation extends Theme_My_Login_Abstract {
                 //$key = wp_generate_password( 20, false );
                 $code = sha1( $user_id . time() );    
                 
-               /* $wpdb->update( 
+              $wpdb->update( 
                     'wp_users', //table name     
                         array( 'user_activation_key' => $code ) // string    ),                               
-                    );*/
+                    );
 
 		// Set the activation key for the user
 		//$wpdb->update( $wpdb->users, array( 'user_activation_key' => $key ), array( 'user_login' => $user->user_login ) );
@@ -436,7 +437,7 @@ class Theme_My_Login_User_Moderation extends Theme_My_Login_Abstract {
 
 		$activation_url = add_query_arg( array( 'action' => 'activate', 'key' => $code, 'login' => rawurlencode( $user_login ) ), wp_login_url() );
 
-		$title    = sprintf( __( '[%s] Activate Your Account', 'theme-my-login' ), $blogname );
+		/*$title    = sprintf( __( '[%s] Activate Your Account', 'theme-my-login' ), $blogname );
 		$message  = sprintf( __( 'Thanks for registering at %s! To complete the activation of your account please click the following link: ', 'theme-my-login' ), $blogname ) . "\r\n\r\n";
 		$message .=  $activation_url . "\r\n";
 
@@ -444,6 +445,11 @@ class Theme_My_Login_User_Moderation extends Theme_My_Login_Abstract {
 		$message = apply_filters( 'user_activation_notification_message', $message, $activation_url, $user_id );
 
 		return wp_mail( $user_email, $title, $message );
+                 *
+                 
+                do_action('woocommerce_registration_new_user_confirm_email_notification',$user_id, $activation_url);
+                * $activation_url
+                */
 	}
 
 	/**
